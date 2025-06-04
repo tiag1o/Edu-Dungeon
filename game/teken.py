@@ -102,7 +102,7 @@ def teken_game(game):
         game.inventory_rects = []  # resetten elke frame
         for i, item in enumerate(game.inventory):
             tekst = game.font.render(f"- {item['naam']}", True, (220, 220, 220))
-            rect = tekst.get_rect(topleft=(520, y_inv + 40 + i * 30))
+            rect = tekst.get_rect(topleft=(920, y_inv + 40 + i * 30))
             game.scherm.blit(tekst, rect.topleft)
             game.inventory_rects.append((rect, item))
     # 🔘 Kladblokknop
