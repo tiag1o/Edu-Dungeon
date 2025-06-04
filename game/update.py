@@ -61,11 +61,14 @@ def update_game(game):
             # 📒 Kladblokknop checken
             if game.kladknop and game.kladknop.collidepoint(muis_pos):
                 game.toggle_kladblok()
-            # 🎒 Verkoop bij klik op een item in de inventaris
+            # 🎒 Item interactie in de inventaris
             if game.inventaris_open:
                 for rect, item in game.inventory_rects:
                     if rect.collidepoint(muis_pos):
-                        game.verkoop_item(item)
+                        if event.button == 1:
+                            game.gebruik_item(item)
+                        elif event.button == 3:
+                            game.verkoop_item(item)
                         break
             #resetknop
             if game.reset_knop and game.reset_knop.collidepoint(muis_pos):
