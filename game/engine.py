@@ -3,7 +3,7 @@ import random
 import importlib
 from game import vragen, monsters 
 from game.monsters import monsterlijst
-from game.items import winkelvoorraad
+from game.items import basis_winkelvoorraad, eiland_winkels
 from game.teken import teken_game
 from game.shop import koop_item
 from game.kladblok import toggle_kladblok, wis_kladblok
@@ -23,8 +23,9 @@ class Game:
         self.inventaris_open = False  # geeft aan of het inventarisvenster open is
         self.goud = 1000
         self.antwoord_gegeven = False
-        self.winkel = winkelvoorraad
-        self.winkel_actief = random.sample(self.winkel, 3)  # 👈 3 unieke shopitems
+        # Start met de basisvoorraad tot een eiland gekozen wordt
+        self.winkel = basis_winkelvoorraad
+        self.winkel_actief = random.sample(self.winkel, min(3, len(self.winkel)))
         self.shop_zones = []  # lijst met item-rectangles
         self.inventory = []            # lijst met gekochte items
         self.symbolen = [
@@ -79,6 +80,13 @@ class Game:
             vragenmodule = importlib.import_module(f"game.vragen.{eiland_naam}")
             self.vraagbron = vragenmodule.vragenlijst
         self.vraag = self.huidig_monster.geef_vraag(self.vraagbron)
+
+    def laad_winkel_voor_eiland(self, eiland_naam):
+        """Laad de winkelvoorraad afhankelijk van het gekozen eiland."""
+        eiland_naam = eiland_naam.lower()
+        voorraad = eiland_winkels.get(eiland_naam, basis_winkelvoorraad)
+        self.winkel = voorraad
+        self.winkel_actief = random.sample(self.winkel, min(3, len(self.winkel)))
 
 
     def update(self):

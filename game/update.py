@@ -40,17 +40,21 @@ def update_game(game):
                     if eiland["rect"].collidepoint(muis_pos):
                         game.huidig_eiland = eiland["naam"]
                         if eiland["naam"] == "Limitanie":
-                            game.laad_vragen_voor_eiland("limitanie")
+                            key = "limitanie"
                         elif eiland["naam"] == "Integralia":
-                            game.laad_vragen_voor_eiland("integralia")
+                            key = "integralia"
                         elif eiland["naam"] == "Logaritimië":
-                            game.laad_vragen_voor_eiland("logaritmie")
+                            key = "logaritmie"
                         elif eiland["naam"] == "Pimania":
-                            game.laad_vragen_voor_eiland("pimania")
+                            key = "pimania"
                         elif eiland["naam"] == "Cirkelosio":
-                            game.laad_vragen_voor_eiland("cirkelosio")
+                            key = "cirkelosio"
                         elif eiland["naam"] == "Gemengd":
-                            game.laad_vragen_voor_eiland("Gemengd")
+                            key = "gemengd"
+                        else:
+                            key = "gemengd"
+                        game.laad_vragen_voor_eiland(key)
+                        game.laad_winkel_voor_eiland(key)
                         game.in_kaartscherm = False  # Zet direct kaartscherm uit
                         game.feedback = f"🗺️ Je hebt {game.huidig_eiland} gekozen!"
                         break
