@@ -9,3 +9,8 @@ def verkoop_item(game, item):
     game.goud += verkoopprijs
     game.inventory.remove(item)
     game.feedback = f"💰 Verkocht voor {verkoopprijs} goud ({verkoop_percentage}%)"
+
+
+def gebruik_item(game, item):
+    from game.items import gebruik_item as gebruik
+    gebruik(game, item)

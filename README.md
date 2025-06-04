@@ -8,7 +8,8 @@ Een educatieve dungeon crawler waarin je wiskundemonsters verslaat door wiskunde
 - **Interactieve landkaart**: Kies een eiland en krijg bijpassende wiskundevragen.
 - **Monsters**: Versla unieke monsters met elk hun eigen vraag en loot.
 - **Winkel**: Koop handige items met goud dat je verdient.
-- **Inventaris**: Bekijk en verkoop je verzamelde items.
+- **Inventaris**: Bekijk je verzamelde items. Klik met links om een item te
+  gebruiken, rechts om het te verkopen.
 - **Kladblok**: Maak aantekeningen of tekeningen tijdens het spelen.
 - **Ideeënbord**: Typ vrij je ideeën of tussenantwoorden op een wit bord.
 - **XP & Leveling**: Verdien XP, stijg in level en zie je voortgang in een XP-bar.
@@ -22,10 +23,11 @@ Een educatieve dungeon crawler waarin je wiskundemonsters verslaat door wiskunde
    - [pygame](https://www.pygame.org/)
    - [requests](https://pypi.org/project/requests/)
    - [duckduckgo_search](https://pypi.org/project/duckduckgo-search/) (optioneel, voor monsterplaatjes)
+   - [sympy](https://pypi.org/project/sympy/) (voor sommige item-effecten)
 
    Installeer dependencies:
    ```bash
-   pip install pygame requests duckduckgo_search
+   pip install pygame requests duckduckgo_search sympy
    ```
 
 2. **Project downloaden**

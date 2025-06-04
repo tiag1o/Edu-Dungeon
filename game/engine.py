@@ -7,7 +7,7 @@ from game.items import basis_winkelvoorraad, eiland_winkels
 from game.teken import teken_game
 from game.shop import koop_item
 from game.kladblok import toggle_kladblok, wis_kladblok
-from game.inventaris import toggle_inventaris, verkoop_item
+from game.inventaris import toggle_inventaris, verkoop_item, gebruik_item as gebruik_inventaris_item
 import os
 
 class Game:
@@ -122,6 +122,9 @@ class Game:
 
     def verkoop_item(self, item):
         verkoop_item(self, item)
+
+    def gebruik_item(self, item):
+        gebruik_inventaris_item(self, item)
 
     def bereken_xp_voor_level(self, level):
         # Exponentiële groei: bijv. 50 * (1.5 ** (level-1))
