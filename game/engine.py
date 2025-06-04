@@ -14,7 +14,7 @@ class Game:
     def __init__(self, scherm):
         self.scherm = scherm
         self.font = pygame.font.SysFont("consolas", 24)
-        self.monsters = self.monsters = monsterlijst
+        self.monsters = monsterlijst
         self.huidig_monster = self.monsters[0]
         self.vraagbron = []  # Nog geen vragen beschikbaar tot een eiland gekozen wordt
         self.vraag = {"vraag": "🗺️ Kies een eiland op de kaart!", "antwoord": "", "hint": ""}
@@ -48,7 +48,6 @@ class Game:
         self.reset_knop = None
         self.inventaris_knop_rect = pygame.Rect(700, 250, 200, 35)
         self.huidig_eiland = None
-        self.kaart_afbeelding = pygame.image.load(resource_path('Landkaart.png'))  # Relatief pad
         self.eilanden = [
             {"naam": "Limitanie", "rect": pygame.Rect(437, 117, 350, 100)},
             {"naam": "Integralia", "rect": pygame.Rect(1100, 270, 350, 100)},
