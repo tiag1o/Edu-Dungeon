@@ -2,13 +2,14 @@ import pygame
 import random
 from game import vragen, monsters 
 from game.monsters import monsterlijst
-from game.items import winkelvoorraad
+from game.items import basis_winkelvoorraad
 
 class Game:
     def __init__(self, scherm):
         self.scherm = scherm
         self.font = pygame.font.SysFont("consolas", 24)
-        self.monsters = self.monsters = monsterlijst
+        # Lijst met beschikbare monsters
+        self.monsters = monsterlijst
         self.huidig_monster = self.monsters[0]
         self.vraag = self.huidig_monster.geef_vraag(vragen.vragenlijst)
         self.invoer = ""
@@ -16,7 +17,8 @@ class Game:
         self.inventaris_open = False  # geeft aan of het inventarisvenster open is
         self.goud = 0
         self.antwoord_gegeven = False
-        self.winkel = winkelvoorraad
+        # Startvoorraad voor de winkel
+        self.winkel = basis_winkelvoorraad
         self.winkel_actief = random.sample(self.winkel, 3)  # 👈 3 unieke shopitems
         self.shop_zones = []  # lijst met item-rectangles
         self.inventory = []            # lijst met gekochte items
