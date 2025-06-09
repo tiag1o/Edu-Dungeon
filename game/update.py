@@ -112,16 +112,38 @@ def update_game(game):
                 juist_antwoord = game.vraag["antwoord"].replace(" ", "").lower()
                 speler_antwoord = game.invoer.replace(" ", "").lower()
                 if speler_antwoord == juist_antwoord:
-                    game.feedback = f"✅ Correct! Je hebt {game.huidig_monster.goud} goud verdiend!"
-                    game.huidig_monster.verslagen = True
-                    game.antwoord_gegeven = True
-                    game.goud += game.huidig_monster.goud
-                    # Geef XP voor monster
-                    if hasattr(game.huidig_monster, 'xp'):
-                        game.geef_xp(game.huidig_monster.xp)
-                    pygame.time.set_timer(pygame.USEREVENT, 1500)  # 1.5 sec wachten op nieuw monster
+                    if getattr(game.huidig_monster, 'is_boss', False):
+                        game.huidig_monster.progress += 1
+                        if game.huidig_monster.progress >= len(game.huidig_monster.vraag_indices):
+                            game.feedback = f"✅ Boss verslagen! Je hebt {game.huidig_monster.goud} goud verdiend!"
+                            game.huidig_monster.verslagen = True
+                            game.antwoord_gegeven = True
+                            game.goud += game.huidig_monster.goud
+                            if hasattr(game.huidig_monster, 'xp'):
+                                game.geef_xp(game.huidig_monster.xp)
+                            pygame.time.set_timer(pygame.USEREVENT, 1500)
+                            game.huidig_monster.progress = 0
+                        else:
+                            resterend = len(game.huidig_monster.vraag_indices) - game.huidig_monster.progress
+                            game.feedback = f"✅ Correct! Nog {resterend} te gaan"
+                            game.vraag = game.huidig_monster.geef_vraag(game.vraagbron)
+                            game.invoer = ""
+                    else:
+                        game.feedback = f"✅ Correct! Je hebt {game.huidig_monster.goud} goud verdiend!"
+                        game.huidig_monster.verslagen = True
+                        game.antwoord_gegeven = True
+                        game.goud += game.huidig_monster.goud
+                        if hasattr(game.huidig_monster, 'xp'):
+                            game.geef_xp(game.huidig_monster.xp)
+                        pygame.time.set_timer(pygame.USEREVENT, 1500)
                 else:
-                    game.feedback = "❌ Helaas, dat is niet juist..."
+                    if getattr(game.huidig_monster, 'is_boss', False):
+                        game.huidig_monster.progress = 0
+                        game.feedback = "❌ Fout! Begin opnieuw."
+                        game.vraag = game.huidig_monster.geef_vraag(game.vraagbron)
+                        game.invoer = ""
+                    else:
+                        game.feedback = "❌ Helaas, dat is niet juist..."
             elif event.key == pygame.K_BACKSPACE:
                 game.invoer = game.invoer[:-1]
             else:

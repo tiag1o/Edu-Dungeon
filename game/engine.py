@@ -95,11 +95,27 @@ class Game:
     def volgende_monster(self):
         # Volgende monster pakken (of random)
         self.huidig_monster = random.choice(self.monsters)
+
+        # Automatische overwinning als speler het speciale item bezit
+        if getattr(self.huidig_monster, "is_boss", False):
+            self.huidig_monster.progress = 0
+            for item in list(self.inventory):
+                if item["naam"] == self.huidig_monster.special_item:
+                    self.inventory.remove(item)
+                    self.feedback = f"🏆 {item['naam']} verslaat {self.huidig_monster.naam}!"
+                    self.goud += self.huidig_monster.goud
+                    if hasattr(self.huidig_monster, 'xp'):
+                        self.geef_xp(self.huidig_monster.xp)
+                    self.huidig_monster.verslagen = True
+                    pygame.time.set_timer(pygame.USEREVENT, 1500)
+                    return
+
         # Gebruik de juiste vragenbron afhankelijk van het gekozen eiland
         if self.vraagbron:
             self.vraag = self.huidig_monster.geef_vraag(self.vraagbron)
         else:
             self.vraag = {"vraag": "🗺️ Kies een eiland op de kaart!", "antwoord": "", "hint": ""}
+
         self.invoer = ""
         self.feedback = ""
         self.antwoord_gegeven = False
