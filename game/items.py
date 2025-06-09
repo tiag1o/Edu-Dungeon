@@ -19,6 +19,13 @@ basis_winkelvoorraad = [
     {"naam": "Sceptor van Stelsels", "prijs": 13}
 ]
 
+# Speciale items om bazen te verslaan
+basis_winkelvoorraad.extend([
+    {"naam": "Kroon Sleutel", "prijs": 50},
+    {"naam": "Ifrit Amulet", "prijs": 70},
+    {"naam": "Log Sleutel", "prijs": 90},
+])
+
 # Unieke items per eiland. Elke lijst bevat voorbeelden uit de
 # categorieën wapens, voedsel, trinkets, armor en draken.
 eiland_winkels = {

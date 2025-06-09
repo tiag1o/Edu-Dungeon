@@ -9,6 +9,21 @@ class Monster:
 
     def geef_vraag(self, vragenlijst):
         return vragenlijst[self.vraag_index]
+
+
+class BossMonster(Monster):
+    """Speciale monsterklasse voor bazen."""
+
+    def __init__(self, naam, vraag_indices, goud, loot, xp, special_item):
+        super().__init__(naam, vraag_indices[0], goud, loot, xp)
+        self.vraag_indices = vraag_indices
+        self.special_item = special_item
+        self.progress = 0
+        self.is_boss = True
+
+    def geef_vraag(self, vragenlijst):
+        index = self.vraag_indices[self.progress]
+        return vragenlijst[index]
 monsterlijst = [
     Monster("Algebraïsche Gier", 0, 10, "Roestig Zwaard van Rekenkracht", 10),
     Monster("Haakjes-Hydra", 1, 15, "Verdedigende Breukenschild", 12),
@@ -32,3 +47,31 @@ monsterlijst = [
     Monster("Oplos-Oger", 19, 24, "X-mark Zwaard", 48),
 
 ]
+
+# Voeg drie bazen toe die meerdere vragen vereisen
+monsterlijst.extend([
+    BossMonster(
+        "Kwadratuur Koning",
+        [0, 1, 2],
+        100,
+        "Kroon der Congruentie",
+        100,
+        "Kroon Sleutel",
+    ),
+    BossMonster(
+        "Integrale Ifrit",
+        [3, 4, 5],
+        150,
+        "Vlam van Volledigheid",
+        150,
+        "Ifrit Amulet",
+    ),
+    BossMonster(
+        "Logaritmische Lord",
+        [6, 7, 8],
+        200,
+        "Scepter der Schalen",
+        200,
+        "Log Sleutel",
+    ),
+])
