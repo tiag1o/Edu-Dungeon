@@ -1,9 +1,13 @@
 import os
+import sys
+import pathlib
+
 os.environ['SDL_VIDEODRIVER'] = 'dummy'
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+
 import py_compile
 import pygame
-
-import pathlib
 
 
 def test_compile_all():
