@@ -49,6 +49,12 @@ pyinstaller main.py --onefile --windowed --add-data "Goudstukken.png;." --add-da
 ```
 De `.exe` vind je in de `dist/` map.
 
+### Automatische builds
+
+Bij iedere push naar `main` wordt via GitHub Actions automatisch een nieuwe
+versie van het spel als `.exe` gebouwd. Het resultaat kun je downloaden als
+artifact van de workflow.
+
 ## Besturing
 
 - **Muis**: Klik op knoppen, eilanden, winkelitems, etc.
